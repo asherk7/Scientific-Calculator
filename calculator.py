@@ -1,21 +1,33 @@
 import tkinter, math
+#operation bool inside insert number
+#while false, regular insert number
+#while true, wipe all numbers and set operation to false, firstval = 0
+#it will be set to true inside add, subtract, etc
+#these functions will save textdisplay to firstval
+#could perform the respective operations on firstval when saving textdisplay instead
+#set operation to true after add subtract divide or multiply are pressed
+#when equal is pressed, save textdisplay to secondval
+#go through if statements to see which operation it is, and do it
+#this can be done by using an operation variable
+#when add is pressed, operation = 'add', etc for other operations
+#when operation is found, do calculations and print the number
+#set first and second val to 0 and set operation to true
+#after equal is pressed, save textdisplay after operations to self.answer
 
 class Calculator:
     def __init__(self):
         self.ans = 0
         self.firstval = 0
         self.secondval = 0
+        self.answer = 0
+        self.wipe = False
+        self.operation = None
     def insertnumber(self, value):
         self.firstval = textDisplay.get() #gets value from the text
         textDisplay.delete(0, tkinter.END) #deletes from 0 index to end
         textDisplay.insert(0, self.firstval + str(value))
     def add(self):
         pass
-        #take the first set of numbers and save to self.add, clear board 
-        #set variable command to add
-        #when equal is pressed, take second set of numbers, look at variable command
-        #add the first and second set of numbers and display it
-        #can do this for every function, equal will have a lot of if statements tho
     def subtract(self):
         pass
     def divide(self):
@@ -24,12 +36,16 @@ class Calculator:
         pass
     def equal(self):
         pass
+    def answer(self):
+        pass
     def squared(self):
-        pass
-        #takes the current number on screen, saves it, squares it and displays that
+        self.firstval = float(textDisplay.get())
+        textDisplay.delete(0, tkinter.END)
+        textDisplay.insert(0, str(self.firstval**2))
     def root(self):
-        pass
-        #same as squared but rooting the number instead
+        self.firstval = float(textDisplay.get())
+        textDisplay.delete(0, tkinter.END)
+        textDisplay.insert(0, str(self.firstval**(1/2)))
     def clear(self):
         textDisplay.delete(0, tkinter.END)
     def remove(self):
@@ -88,25 +104,25 @@ def buttoninitialization(): #creating each button
     multiply = tkinter.Button(window, text='x', width = 4, height = 3, background = 'black', foreground = 'white', command=lambda: calc.multiply())
     equal = tkinter.Button(window, text='=', width = 4, height = 3, background = 'black', foreground = 'white', command=lambda: calc.equal())
     
-    add.grid(row=2, column=4, padx=1, pady=1)
-    subtract.grid(row=3, column=4, padx=1, pady=1)
-    divide.grid(row=4, column=4, padx=1, pady=1)
-    multiply.grid(row=5, column=4, padx=1, pady=1)
-    equal.grid(row=5, column=3, padx=1, pady=1)
+    add.grid(row=1, column=4, padx=1, pady=1)
+    subtract.grid(row=2, column=4, padx=1, pady=1)
+    divide.grid(row=3, column=4, padx=1, pady=1)
+    multiply.grid(row=4, column=4, padx=1, pady=1)
+    equal.grid(row=5, column=4, padx=1, pady=1)
 
     clear = tkinter.Button(window, text='CE', width = 4, height = 3, background = 'black', foreground = 'white', command=lambda: calc.clear())
     backspace = tkinter.Button(window, text='⌫', width = 4, height = 3, background = 'black', foreground = 'white', command=lambda: calc.remove())
     squared = tkinter.Button(window, text='x²', width = 4, height = 3, background = 'black', foreground = 'white', command=lambda: calc.squared())
-    root = tkinter.Button(window, text='√', width = 4, height = 3, background = 'black', foreground = 'white', command=lambda: calc.root())
+    answer = equal = tkinter.Button(window, text='ans', width = 4, height = 3, background = 'black', foreground = 'white', command=lambda: calc.answer())
 
-    clear.grid(row=1, column=3, padx=1, pady=1)
-    backspace.grid(row=1, column=4, padx=1, pady=1)
-    squared.grid(row=1, column=2, padx=1, pady=1)
-    root.grid(row=1, column=1, padx=1, pady=1)
+    clear.grid(row=1, column=2, padx=1, pady=1)
+    backspace.grid(row=1, column=3, padx=1, pady=1)
+    squared.grid(row=1, column=1, padx=1, pady=1)
+    answer.grid(row=5, column=3, padx=1, pady=1)
 
 def scientificbuttonadd():
     pass
-    #creating buttons for sin, cos, tan, e, log, ln, exponent, factorial, modulus, pi
+    #creating buttons for sin, cos, tan, e, log, ln, exponent, factorial, square root, pi
 
 def scientificbuttondel():
     pass
