@@ -1,5 +1,5 @@
 import tkinter, math
-#operation bool inside insert number
+#wipe bool inside insert number
 #while false, regular insert number
 #while true, wipe all numbers and set operation to false, firstval = 0
 #it will be set to true inside add, subtract, etc
@@ -15,6 +15,8 @@ import tkinter, math
 #after equal is pressed, save textdisplay after operations to self.answer
 
 class Calculator:
+    #add a recursion method to round if there's repeating decimals
+    #could also check if first 2-3 decimals are 9's, then round
     def __init__(self):
         self.ans = 0
         self.firstval = 0
@@ -41,11 +43,29 @@ class Calculator:
     def squared(self):
         self.firstval = float(textDisplay.get())
         textDisplay.delete(0, tkinter.END)
-        textDisplay.insert(0, str(self.firstval**2))
+        textDisplay.insert(0, str(math.pow(self.firstval, 2)))
+    def sin(self):
+        pass
+    def cos(self):
+        pass
+    def tan(self):
+        pass
+    def e(self):
+        pass
+    def log(self):
+        pass
+    def ln(self):
+        pass
+    def exponent(self):
+        pass
+    def factorial(self):
+        pass
+    def pi(self):
+        pass
     def root(self):
         self.firstval = float(textDisplay.get())
         textDisplay.delete(0, tkinter.END)
-        textDisplay.insert(0, str(self.firstval**(1/2)))
+        textDisplay.insert(0, str(math.sqrt(self.firstval)))
     def clear(self):
         textDisplay.delete(0, tkinter.END)
     def remove(self):
@@ -63,14 +83,14 @@ def main():
     menu = tkinter.Menu(window) #creating a menu for the gui
     filemenu = tkinter.Menu(menu, tearoff=0) #creating sub menus within the menu
     menu.add_cascade(label='Calculator', menu=filemenu) #adding a dropdown, setting its dropdowns to filemenu
-    filemenu.add_command(label="Standard", command=scientificbuttondel()) #adding options within dropdown
-    filemenu.add_command(label="Scientific", command=scientificbuttonadd())
+    filemenu.add_command(label="Standard", command=lambda: scientificbuttondel()) #adding options within dropdown
+    filemenu.add_command(label="Scientific", command=lambda: scientificbuttonadd())
     window.config(menu=menu) #creating the menu
 
     textDisplay = tkinter.Entry(window, width = 25, bd = 15, justify='right') #creating the screen
     textDisplay.grid(row=0, column=0, columnspan = 5)
     buttoninitialization()
-    
+
     window.mainloop() 
 
 def buttoninitialization(): #creating each button
@@ -121,11 +141,39 @@ def buttoninitialization(): #creating each button
     answer.grid(row=5, column=3, padx=1, pady=1)
 
 def scientificbuttonadd():
-    pass
-    #creating buttons for sin, cos, tan, e, log, ln, exponent, factorial, square root, pi
+    global sin, cos, tan, e, log, ln, exponent, factorial, root, pi
+    sin = tkinter.Button(window, text='sin', width = 4, height = 3, background = 'black', foreground = 'white', command=lambda: calc.sin())
+    cos = tkinter.Button(window, text='cos', width = 4, height = 3, background = 'black', foreground = 'white', command=lambda: calc.cos())
+    tan = tkinter.Button(window, text='tan', width = 4, height = 3, background = 'black', foreground = 'white', command=lambda: calc.tan())
+    e = tkinter.Button(window, text='e', width = 4, height = 3, background = 'black', foreground = 'white', command=lambda: calc.e())
+    log = tkinter.Button(window, text='log', width = 4, height = 3, background = 'black', foreground = 'white', command=lambda: calc.log())
+    ln = tkinter.Button(window, text='ln', width = 4, height = 3, background = 'black', foreground = 'white', command=lambda: calc.ln())
+    exponent = tkinter.Button(window, text='E', width = 4, height = 3, background = 'black', foreground = 'white', command=lambda: calc.exponent())
+    factorial = tkinter.Button(window, text='!', width = 4, height = 3, background = 'black', foreground = 'white', command=lambda: calc.factorial())
+    root = tkinter.Button(window, text='√', width = 4, height = 3, background = 'black', foreground = 'white', command=lambda: calc.root())
+    pi = tkinter.Button(window, text='π', width = 4, height = 3, background = 'black', foreground = 'white', command=lambda: calc.pi())
+    
+    sin.grid(row=1, column=5, padx=1, pady=1)
+    cos.grid(row=2, column=5, padx=1, pady=1)
+    tan.grid(row=3, column=5, padx=1, pady=1)
+    e.grid(row=4, column=5, padx=1, pady=1)
+    log.grid(row=5, column=5, padx=1, pady=1)
+    ln.grid(row=1, column=6, padx=1, pady=1)
+    exponent.grid(row=2, column=6, padx=1, pady=1)
+    factorial.grid(row=3, column=6, padx=1, pady=1)
+    root.grid(row=4, column=6, padx=1, pady=1)
+    pi.grid(row=5, column=6, padx=1, pady=1)
 
 def scientificbuttondel():
-    pass
-    #removing the newly added buttons
+    sin.grid_forget()
+    cos.grid_forget()
+    tan.grid_forget()
+    e.grid_forget()
+    log.grid_forget()
+    ln.grid_forget()
+    exponent.grid_forget()
+    factorial.grid_forget()
+    root.grid_forget()
+    pi.grid_forget()
 
 main()
