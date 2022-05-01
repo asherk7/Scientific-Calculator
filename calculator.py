@@ -17,6 +17,7 @@ import tkinter, math
 class Calculator:
     #add a recursion method to round if there's repeating decimals
     #could also check if first 2-3 decimals are 9's, then round
+    #create a function for this method
     def __init__(self):
         self.ans = 0
         self.firstval = 0
