@@ -13,11 +13,9 @@ import tkinter, math
 #when operation is found, do calculations and print the number
 #set first and second val to 0 and set operation to true
 #after equal is pressed, save textdisplay after operations to self.answer
+#implement a try and except for math errors, use wipe
 
 class Calculator:
-    #add a recursion method to round if there's repeating decimals
-    #could also check if first 2-3 decimals are 9's, then round
-    #create a function for this method
     def __init__(self):
         self.ans = 0
         self.firstval = 0
@@ -26,9 +24,12 @@ class Calculator:
         self.wipe = False
         self.operation = None
     def insertnumber(self, value):
-        self.firstval = textDisplay.get() #gets value from the text
-        textDisplay.delete(0, tkinter.END) #deletes from 0 index to end
-        textDisplay.insert(0, self.firstval + str(value))
+        if self.wipe == False:
+            self.firstval = textDisplay.get() #gets value from the text
+            textDisplay.delete(0, tkinter.END) #deletes from 0 index to end
+            textDisplay.insert(0, self.firstval + str(value))
+        else:
+            pass
     def add(self):
         pass
     def subtract(self):
@@ -41,32 +42,66 @@ class Calculator:
         pass
     def answer(self):
         pass
+        #if textdisplay isnt empty, multiply ans with whatever is on it
+        #if its empty or equal to 0, paste the answer in textdisplay
+        #if there's an operation, wipe textdisplay and put ans in
+        #when equal is pressed, it'll do the operation
+    def pi(self):
+        pass
+        #if textdisplay isnt empty, multiply ans with whatever is on it
+        #if its empty or equal to 0, paste the answer in textdisplay
+        #if there's an operation, wipe textdisplay and put ans in
+        #when equal is pressed, it'll do the operation
     def squared(self):
         self.firstval = float(textDisplay.get())
         textDisplay.delete(0, tkinter.END)
-        textDisplay.insert(0, str(math.pow(self.firstval, 2)))
+        self.answer = rounder(math.pow(self.firstval, 2))
+        textDisplay.insert(0, str(self.answer))
     def sin(self):
-        pass
+        self.firstval = float(textDisplay.get())
+        textDisplay.delete(0, tkinter.END)
+        self.answer = rounder(math.sin(self.firstval))
+        textDisplay.insert(0, str(self.answer))
     def cos(self):
-        pass
+        self.firstval = float(textDisplay.get())
+        textDisplay.delete(0, tkinter.END)
+        self.answer = rounder(math.cos(self.firstval))
+        textDisplay.insert(0, str(self.answer))
     def tan(self):
-        pass
+        self.firstval = float(textDisplay.get())
+        textDisplay.delete(0, tkinter.END)
+        self.answer = rounder(math.tan(self.firstval))
+        textDisplay.insert(0, str(self.answer))
     def e(self):
-        pass
+        self.firstval = float(textDisplay.get())
+        textDisplay.delete(0, tkinter.END)
+        self.answer = rounder(math.exp(self.firstval))
+        textDisplay.insert(0, str(self.answer))
     def log(self):
-        pass
+        self.firstval = float(textDisplay.get())
+        textDisplay.delete(0, tkinter.END)
+        self.answer = rounder(math.log10(self.firstval))
+        textDisplay.insert(0, str(self.answer))
     def ln(self):
-        pass
+        self.firstval = float(textDisplay.get())
+        textDisplay.delete(0, tkinter.END)
+        self.answer = rounder(math.log(self.firstval))
+        textDisplay.insert(0, str(self.answer))
     def exponent(self):
-        pass
+        self.firstval = float(textDisplay.get())
+        textDisplay.delete(0, tkinter.END)
+        self.answer = rounder(math.pow(10, self.firstval))
+        textDisplay.insert(0, str(self.answer))
     def factorial(self):
-        pass
-    def pi(self):
-        pass
+        self.firstval = float(textDisplay.get())
+        textDisplay.delete(0, tkinter.END)
+        self.answer = rounder(math.factorial(int(self.firstval)))
+        textDisplay.insert(0, str(self.answer))
     def root(self):
         self.firstval = float(textDisplay.get())
         textDisplay.delete(0, tkinter.END)
-        textDisplay.insert(0, str(math.sqrt(self.firstval)))
+        self.answer = rounder(math.sqrt(self.firstval))
+        textDisplay.insert(0, str(self.answer))
     def clear(self):
         textDisplay.delete(0, tkinter.END)
     def remove(self):
@@ -176,5 +211,11 @@ def scientificbuttondel():
     factorial.grid_forget()
     root.grid_forget()
     pi.grid_forget()
+
+def rounder(x):
+    if float(x)-int(x) >= 0.99:
+        return round(x)
+    else:
+        return x
 
 main()
