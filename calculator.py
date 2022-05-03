@@ -1,18 +1,4 @@
 import tkinter, math
-#wipe bool inside insert number
-#while false, regular insert number
-#while true, wipe all numbers and set operation to false, firstval = 0
-#it will be set to true inside add, subtract, etc
-#these functions will save textdisplay to firstval
-#could perform the respective operations on firstval when saving textdisplay instead
-#set operation to true after add subtract divide or multiply are pressed
-#when equal is pressed, save textdisplay to secondval
-#go through if statements to see which operation it is, and do it
-#this can be done by using an operation variable
-#when add is pressed, operation = 'add', etc for other operations
-#when operation is found, do calculations and print the number
-#set first and second val to 0 and set operation to true
-#after equal is pressed, save textdisplay after operations to self.answer
 #implement a try and except for math errors, use wipe
 
 class Calculator:
@@ -20,26 +6,61 @@ class Calculator:
         self.ans = 0
         self.firstval = 0
         self.secondval = 0
-        self.answer = 0
         self.wipe = False
         self.operation = None
     def insertnumber(self, value):
         if self.wipe == False:
-            self.firstval = textDisplay.get() #gets value from the text
+            val = textDisplay.get() #gets value from the text
             textDisplay.delete(0, tkinter.END) #deletes from 0 index to end
-            textDisplay.insert(0, self.firstval + str(value))
+            textDisplay.insert(0, val + str(value))
         else:
-            pass
+            textDisplay.delete(0, tkinter.END)
+            textDisplay.insert(0, str(value))
+            self.wipe = False
     def add(self):
-        pass
+        if self.operation != None:
+            self.equal()
+        self.wipe = True
+        self.firstval = float(textDisplay.get())
+        self.operation = 'add'
     def subtract(self):
-        pass
+        if self.operation != None:
+            self.equal()
+        self.wipe = True
+        self.firstval = float(textDisplay.get())
+        self.operation = 'subtract'
     def divide(self):
-        pass
+        if self.operation != None:
+            self.equal()
+        self.wipe = True
+        self.firstval = float(textDisplay.get())
+        self.operation = 'divide'
     def multiply(self):
-        pass
+        if self.operation != None:
+            self.equal()
+        self.wipe = True
+        self.firstval = float(textDisplay.get())
+        self.operation = 'multiply'
     def equal(self):
-        pass
+        self.secondval = float(textDisplay.get())
+        textDisplay.delete(0, tkinter.END)
+        self.wipe = True
+        if self.operation == 'add':
+            self.ans = rounder(self.firstval + self.secondval)
+            self.insertnumber(self.ans)
+            self.operation = None
+        elif self.operation == 'subtract':
+            self.ans = rounder(self.firstval - self.secondval)
+            self.insertnumber(self.ans)
+            self.operation = None
+        elif self.operation == 'divide':
+            self.ans = rounder(self.firstval / self.secondval)
+            self.insertnumber(self.ans)
+            self.operation = None
+        elif self.operation == 'multiply':
+            self.ans = rounder(self.firstval * self.secondval)
+            self.insertnumber(self.ans)
+            self.operation = None
     def answer(self):
         pass
         #if textdisplay isnt empty, multiply ans with whatever is on it
@@ -53,55 +74,55 @@ class Calculator:
         #if there's an operation, wipe textdisplay and put ans in
         #when equal is pressed, it'll do the operation
     def squared(self):
-        self.firstval = float(textDisplay.get())
+        val = float(textDisplay.get())
         textDisplay.delete(0, tkinter.END)
-        self.answer = rounder(math.pow(self.firstval, 2))
-        textDisplay.insert(0, str(self.answer))
+        self.ans = rounder(math.pow(val, 2))
+        textDisplay.insert(0, str(self.ans))
     def sin(self):
-        self.firstval = float(textDisplay.get())
+        val = float(textDisplay.get())
         textDisplay.delete(0, tkinter.END)
-        self.answer = rounder(math.sin(self.firstval))
-        textDisplay.insert(0, str(self.answer))
+        self.ans = rounder(math.sin(val))
+        textDisplay.insert(0, str(self.ans))
     def cos(self):
-        self.firstval = float(textDisplay.get())
+        val = float(textDisplay.get())
         textDisplay.delete(0, tkinter.END)
-        self.answer = rounder(math.cos(self.firstval))
-        textDisplay.insert(0, str(self.answer))
+        self.ans = rounder(math.cos(val))
+        textDisplay.insert(0, str(self.ans))
     def tan(self):
-        self.firstval = float(textDisplay.get())
+        val = float(textDisplay.get())
         textDisplay.delete(0, tkinter.END)
-        self.answer = rounder(math.tan(self.firstval))
-        textDisplay.insert(0, str(self.answer))
+        self.ans = rounder(math.tan(val))
+        textDisplay.insert(0, str(self.ans))
     def e(self):
-        self.firstval = float(textDisplay.get())
+        val = float(textDisplay.get())
         textDisplay.delete(0, tkinter.END)
-        self.answer = rounder(math.exp(self.firstval))
-        textDisplay.insert(0, str(self.answer))
+        self.ans = rounder(math.exp(val))
+        textDisplay.insert(0, str(self.ans))
     def log(self):
-        self.firstval = float(textDisplay.get())
+        val = float(textDisplay.get())
         textDisplay.delete(0, tkinter.END)
-        self.answer = rounder(math.log10(self.firstval))
-        textDisplay.insert(0, str(self.answer))
+        self.ans = rounder(math.log10(val))
+        textDisplay.insert(0, str(self.ans))
     def ln(self):
-        self.firstval = float(textDisplay.get())
+        val = float(textDisplay.get())
         textDisplay.delete(0, tkinter.END)
-        self.answer = rounder(math.log(self.firstval))
-        textDisplay.insert(0, str(self.answer))
+        self.ans = rounder(math.log(val))
+        textDisplay.insert(0, str(self.ans))
     def exponent(self):
-        self.firstval = float(textDisplay.get())
+        val = float(textDisplay.get())
         textDisplay.delete(0, tkinter.END)
-        self.answer = rounder(math.pow(10, self.firstval))
-        textDisplay.insert(0, str(self.answer))
+        self.ans = rounder(math.pow(10, val))
+        textDisplay.insert(0, str(self.ans))
     def factorial(self):
-        self.firstval = float(textDisplay.get())
+        val = float(textDisplay.get())
         textDisplay.delete(0, tkinter.END)
-        self.answer = rounder(math.factorial(int(self.firstval)))
-        textDisplay.insert(0, str(self.answer))
+        self.ans = math.factorial(int(val))
+        textDisplay.insert(0, str(self.ans))
     def root(self):
-        self.firstval = float(textDisplay.get())
+        val = float(textDisplay.get())
         textDisplay.delete(0, tkinter.END)
-        self.answer = rounder(math.sqrt(self.firstval))
-        textDisplay.insert(0, str(self.answer))
+        self.ans = rounder(math.sqrt(val))
+        textDisplay.insert(0, str(self.ans))
     def clear(self):
         textDisplay.delete(0, tkinter.END)
     def remove(self):
