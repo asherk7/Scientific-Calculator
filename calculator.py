@@ -125,6 +125,7 @@ class Calculator:
         textDisplay.insert(0, str(self.ans))
     def clear(self):
         textDisplay.delete(0, tkinter.END)
+        self.firstval = 0
     def remove(self):
         val = textDisplay.get() #saves the text
         textDisplay.delete(0, tkinter.END) 
